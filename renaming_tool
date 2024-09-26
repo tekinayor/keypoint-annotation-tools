@@ -1,0 +1,31 @@
+import os
+
+def rename_files_in_folder(folder_path, base_name):
+    # Get a list of all files in the folder
+    files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+    
+    # Sort files to ensure consistent ordering
+    files.sort()
+    
+    # Loop through each file and rename it
+    for count, filename in enumerate(files, start=1):
+        # Get the file extension
+        file_extension = os.path.splitext(filename)[1]
+        
+        # Create new file name
+        new_filename = f"{base_name}_000{count}{file_extension}"
+        
+        # Get full paths
+        old_file = os.path.join(folder_path, filename)
+        new_file = os.path.join(folder_path, new_filename)
+        
+        # Rename the file
+        os.rename(old_file, new_file)
+        print(f"Renamed: {filename} -> {new_filename}")
+
+# Specify the folder path and base name
+folder_path = "./Videos/Raw Images/File 7"  # Change this to the path of your folder
+base_name = "workouts7"
+
+# Run the renaming function
+rename_files_in_folder(folder_path, base_name)
